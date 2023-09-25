@@ -1,32 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: inventorymc
+  name: ordermc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: inventorymc
+      app: ordermc
   template:
     metadata:
       labels:
-        app: inventorymc
+        app: ordermc
     spec:
       containers:
-      - name: inventorymc
-        image: oumaimahamrouni/inventory
+      - name: ordermc
+        image: oumaimahamrouni/order
         ports:
-        - containerPort: 8082
+        - containerPort: 8081
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: inventorys
+  name: orders
 spec:	
   selector:
-    app: inventorymc
+    app: ordermc
   type: ClusterIP
   ports:
   - port: 8080
     targetPort: 8080
+
 
