@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+    stage('Apply Kubernetes File') {
+        steps {
+          withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: '	kubejenkins', namespace: 'default', serverUrl: 'https://172.31.25.107:6443']]) 
+
+         {
+               sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+               sh 'chmod u+x ./kubectl'
+               sh './kubectl apply -f deploy.yml'
+               echo 'service ok'
+         }
+            }
+  }
+}
+}
