@@ -3,7 +3,13 @@ pipeline {
 
 	
     stages {
-        stage('Build du Projet ') { 
+	
+	    
+
+
+	
+	
+        stage('Build du Projet') { 
 		 agent {docker 'maven:3.8.3-openjdk-17'}
             steps {
 			
@@ -19,10 +25,13 @@ pipeline {
                  unstash 'targetfiles'
 			   
 			   script {
-			           sh 'docker build . -t inventoryimage:latest'
+			           sh 'docker build . -t orderimage:latest'
                         sh'docker login -u oumaimahamrouni -p oumaima22091996'
-						sh 'docker tag inventoryimage oumaimahamrouni/inventory'
-						sh 'docker push oumaimahamrouni/inventory'
+						sh 'docker tag orderimage oumaimahamrouni/order'
+						sh 'docker push oumaimahamrouni/order'
+
+
+               
                     }
 			   
 			   
